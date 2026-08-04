@@ -1,5 +1,6 @@
 import argparse
 from scripts.URL import URL
+from scripts.Parser import Parser
 
 
 parser = argparse.ArgumentParser()
@@ -19,8 +20,17 @@ def main():
     output = args.output
 
     urls = URL(url, file)
+
+    # Remove duplicates
     if file:
         url = urls.remove_duplicates()
+
+    # Parser
+    for parser_url in url:
+        parser = Parser(parser_url)
+        payload_read = open("./db/payloads.txt").read().splitlines()
+        for payload in payload_read:
+            parsed_urls = parser.parser_params(payload)
 
 if __name__ == "__main__":
     main()
