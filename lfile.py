@@ -34,7 +34,8 @@ def main():
         payload_read = open("./db/payloads.txt").read().splitlines()
         for payload in payload_read:
             parsed_urls = parser.parser_params(payload)
-            parsed_urls_params.append(parsed_urls)
+            if parsed_urls:
+                parsed_urls_params.append(parsed_urls)
 
     # Requests
     req = Requests()
@@ -42,8 +43,8 @@ def main():
         futures = [executor.submit(req.requests, url) for url in parsed_urls_params]
         for future in concurrent.futures.as_completed(futures):
             result = future.result()
-            if "root:" in result:
-                print("Directory traversal found!")
+            if "root:" in result[0]:
+                print(f"Directory traversal found -> \033[92m{result[1]}\033[00m")
 
 if __name__ == "__main__":
     main()

@@ -10,6 +10,6 @@ class Requests:
         try:
             req = requests.get(url, headers=headers, allow_redirects=False, timeout=6)
             text = req.text
-            return text
+            return text, url
         except:
             pass
