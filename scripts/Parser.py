@@ -1,4 +1,4 @@
-from urllib.parse import urlparse, parse_qsl, urlencode, urlunparse, unquote, urlsplit
+from urllib.parse import urlparse, parse_qsl, urlencode, urlunparse, unquote
 
 
 class Parser:
