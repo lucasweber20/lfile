@@ -8,10 +8,9 @@ class Parser:
     def parser_params(self, payload):
         keyword = payload
         parsed_url = urlparse(self.url)
-        if parsed_url.query:
-            params = parse_qsl(parsed_url.query)
-            fuzzed_params = [(k, keyword) for k, _ in params]
-            fuzzed_query = urlencode(fuzzed_params)
-            fuzzed_url = unquote(urlunparse([parsed_url.scheme, parsed_url.netloc, parsed_url.path, parsed_url.params, fuzzed_query, parsed_url.fragment]))
+        params = parse_qsl(parsed_url.query)
+        fuzzed_params = [(k, keyword) for k, _ in params]
+        fuzzed_query = urlencode(fuzzed_params)
+        fuzzed_url = unquote(urlunparse([parsed_url.scheme, parsed_url.netloc, parsed_url.path, parsed_url.params, fuzzed_query, parsed_url.fragment]))
 
-            return fuzzed_url
+        return fuzzed_url
