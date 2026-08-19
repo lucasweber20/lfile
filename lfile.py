@@ -1,6 +1,5 @@
 import argparse
 import concurrent.futures
-from scripts.URL import URL
 from scripts.Parser import Parser
 from scripts.Requests import Requests
 
@@ -21,11 +20,8 @@ def main():
     thread = args.thread
     output = args.output
 
-    urls = URL(url, file)
-
-    # Remove duplicates
     if file:
-        url = urls.remove_duplicates()
+        url = open(file).read().splitlines()
 
     # Parser
     parsed_urls_params = []
